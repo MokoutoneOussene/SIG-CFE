@@ -102,7 +102,7 @@
                     </tr>
                 </thead>
             </table>
-            <p>Arreté le présent ordre de recette à la somme de
+            <p>Arreté le présent ordre de recette à la somme de <strong class="text-uppercase">{{conversion($montant_total)}}</strong>
                 <strong>({{ number_format($montant_total, 0, ',', ' ') }}) FRANCS CFA</strong>
             </p>
         </div>

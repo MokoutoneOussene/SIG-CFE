@@ -61,7 +61,7 @@
         </div>
 
         <div class="col-12 text-start m-3">
-            <h5>Numéro ordre de recette : <strong>{{ $reglements->Recette->id }}</strong></h5>
+            <h5>Numéro ordre de recette : <strong>FAC{{ $reglements->Recette->id }}</strong></h5>
             <h5>Objet : <strong>{{ $reglements->Recette->objet }}</strong></h5>
         </div>
 
@@ -97,7 +97,7 @@
                     </tr>
                 </thead>
             </table>
-            <p>Arreté le présent ordre de recette à la somme de
+            <p>Arreté le présent ordre de recette à la somme de <strong class="text-uppercase">{{conversion($reglements->versement)}}</strong>
                 <strong>({{ number_format($reglements->versement, 0, ',', ' ') }}) FRANCS CFA</strong>
             </p>
         </div>

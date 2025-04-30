@@ -15,26 +15,31 @@
 <body style="height: 90vh;">
     <div id="layoutSidenav_content">
 
-        <div style="border-bottom: 1px solid black; margin: 10px;">
-            <div class="d-flex justify-content-between col-md-12">
-                <div class="col-2">
-                    <img src="{{ asset('images/auth-bg.jpg') }}" alt="Logo" class="img-fluid" style="width: 100px;">
-                </div>
-                <div class="col-6">
-                    <h1 class="text-center mt-1" style="font-size: 20px;">
-                        <strong>DJAGO INTERNATIONAL</strong>
-                    </h1>
-                    <h6 class="mt-1 text-center">Intégrateur de solution Informatique, Développement & coneption,
-                        Marketing digitale</h6>
-                    <h5 class="mt-1 text-center">Ouagadougou (à la Zone 1, à 200 mètres de la pédiatrie)</h5>
-                </div>
-                <div class="col-4 text-center">
-                    <h3>BURKINA FASO</h3>
-                    <P>--------------------------</P>
-                    <h5>La Patrie ou la Mort, nous Vaincrons</h5>
+        @forelse (App\Models\Entete::all() as $item)
+            <div style="border-bottom: 1px solid black;">
+                <div class="d-flex justify-content-between col-md-12">
+                    <div class="col-2">
+                        <img src="{{ asset('storage') . '/' . $item->logo }}" alt="Logo" class="img-fluid"
+                            style="width: 100px;">
+                    </div>
+                    <div class="col-6">
+                        <h1 class="text-center text-uppercase mt-1" style="font-size: 20px;">
+                            <strong>{{ $item->denomination }}</strong>
+                        </h1>
+                        <h6 class="mt-1 text-center">{{ $item->activite }}</h6>
+                        <h5 class="mt-1 text-center">{{ $item->postale }}</h5>
+                    </div>
+                    <div class="col-4 text-center">
+                        <h3>BURKINA FASO</h3>
+                        <P>--------------------------</P>
+                        <h5>La Patrie ou la Mort, nous Vaincrons</h5>
+                    </div>
                 </div>
             </div>
-        </div>
+        @empty
+            <p class="text-danger">Veuillez inserer une entete de la société !</p>
+        @endforelse
+
         <div class="d-flex justify-content-end m-3">
             <h5>Ouagadougou, le {{ date('d-m-Y') }}</h5>
         </div>
@@ -58,10 +63,15 @@
 
         <div class="m-5"></div>
 
+        <div class="col-12 text-start m-3">
+            <h5>Facture Fournisseur N° <strong>FAC{{ $reglements->FactureFournisseur->id }}</strong></h5>
+            <h5><strong>Objet :</strong> {{ $reglements->FactureFournisseur->objet }}</h5>
+        </div>
+
         <div class="m-3">
             <table class="table table-bordered border-dark">
                 <thead>
-                    <tr>
+                    <tr style="background: #cdc8c8">
                         <th>N°</th>
                         <th>Mode reglement</th>
                         <th>Net à payer</th>
@@ -84,11 +94,11 @@
                 <thead>
                     <tr class="text-center">
                         <th colspan="4">MONTANT TOTAL</th>
-                        <th colspan="2">{{ number_format($reglements->versement, 0, ',', ' ') }} FCFA</th>
+                        <th colspan="2" style="background: #cdc8c8">{{ number_format($reglements->versement, 0, ',', ' ') }} FCFA</th>
                     </tr>
                 </thead>
             </table>
-            <p>Arreté le présent ordre de recette à la somme de
+            <p>Arreté le présent ordre de recette à la somme de <strong class="text-uppercase">{{conversion($reglements->versement)}}</strong>
                 <strong>({{ number_format($reglements->versement, 0, ',', ' ') }}) FRANCS CFA</strong></p>
         </div>
 

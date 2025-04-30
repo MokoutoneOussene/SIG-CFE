@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use NumberFormatter;
 use App\Models\Budget;
 use App\Models\Entete;
 use App\Models\Recette;
@@ -319,7 +320,7 @@ class RecetteController extends Controller
 
         $entetes = Entete::all();
 
-        return view('pages.recette.print_recette', compact('recette', 'elements', 'montant_total', 'entetes',));
+        return view('pages.recette.print_recette', compact('recette', 'elements', 'montant_total', 'entetes'));
     }
 
     /**
